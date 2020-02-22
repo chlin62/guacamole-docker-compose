@@ -1,0 +1,18 @@
+[Unit]
+Description=Guacamole service with docker compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=20s
+
+WorkingDirectory=/root/guacamole-docker-compose
+
+ExecStartPre=/usr/local/bin/docker-compose down
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose down
+
+[Install]
+WantedBy=multi-user.target
